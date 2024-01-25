@@ -2317,6 +2317,14 @@ public class DroneModel implements CommonCallbacks.CompletionCallback {
             if(motion.mask.ignorePosZ) destZ = alt;
 
             // Distance to destination
+            Log.i(TAG, "lat: " + lat + " lng: " + lng + " alt: " + alt);
+            Log.i(TAG, "destX: " + destX + " destY: " + destY + " destZ: " + destZ);
+            // When we don't have GPS, lat, lng could be NaN. Set them to 0
+            if(Double.isNaN(lat)) lat = 0;
+            if(Double.isNaN(lng)) lng = 0;
+            if(Double.isNaN(destX)) destX = 0;
+            if(Double.isNaN(destY)) destY = 0;
+
             double dist = getMetersBetweenWaypoints(destX, destY, destZ, lat, lng, alt);
 
             // Look at
